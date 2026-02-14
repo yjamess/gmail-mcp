@@ -3,9 +3,9 @@
 An MCP server built with Python and `uv` that allows Claude Desktop to read unread emails and create threaded draft replies.
 
 ## Features
-- `get_unread_emails`: Fetches the latest unread emails (sender, subject, snippet).
+- `get_unread_emails`: Fetches the latest unread emails (sender, subject, body/snippet).
 - `create_draft_reply`: Creates a correctly threaded draft reply in Gmail.
-- (Optional) `get_style_guide`: Provides custom writing style context.
+- (Optional) `get_email_style_guide`: Provides custom writing style context.
 
 ## Prerequisites
 - [uv](https://docs.astral.sh/uv/) installed.
@@ -14,31 +14,26 @@ An MCP server built with Python and `uv` that allows Claude Desktop to read unre
 
 ## Setup
 
-**Clone and Install:**
-   ```bash
-   git clone <(https://github.com/yjamess/gmail-mcp)>
-   cd mcp-gmail-server
-   uv sync
+**Clone and install:**
+```bash
+git clone https://github.com/yjamess/gmail-mcp.git
+cd gmail-mcp
+uv sync
 ```
 
-**Authentication:
-Place your credentials.json in the root folder.
-Run the setup script to generate token.json:
-
-```Bash
+**Authentication:** Place `credentials.json` in the repo root, then run:
+```bash
 uv run setup_gmail.py
 ```
-Claude Desktop Configuration:
-Add this to your claude_desktop_config.json:
-
-```JSON
+**Claude Desktop:** Add to `claude_desktop_config.json`:
+```json
 {
   "mcpServers": {
     "gmail-manager": {
       "command": "/PATH/TO/uv",
       "args": [
         "--directory",
-        "/ABSOLUTE/PATH/TO/mcp-gmail-server",
+        "/ABSOLUTE/PATH/TO/gmail-mcp",
         "run",
         "server.py"
       ]
